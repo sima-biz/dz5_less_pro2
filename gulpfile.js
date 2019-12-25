@@ -9,7 +9,7 @@ const liveReload = require("gulp-livereload");
 const CSS_COMPILERS = {
   less: {
     name: "less",
-    cb: () => less()
+    cb: () => less().on("error", error => console.log(error))
   },
   sass: {
     name: "sass",

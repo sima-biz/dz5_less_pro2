@@ -1,72 +1,90 @@
-# Template Project
+[Английская версия документации](readme-en.md)
 
-[russian version](readme-ru.md)
+### Перед установкой:
 
-### Before Install:
+Проверьте, установлена ли у вас node.js. Наберите в терминале:
 
-Check if you have node.js installed. Type in terminal:
-   ```bash
-   node --version
-   ```
+```bash
+node --version
+```
 
-If node.js is not installed:
+Если node.js не установлена:
 
-- [install node.js](https://nodejs.org/ru/)
+- [установите node.js](https://nodejs.org/ru/)
 
-### How to use:
+### Как использовать проект:
 
-#### Create own repo from this template using "Use This Template" button.
+#### Создайте свой репозитроий из этого шаблона, используя кнопку "Use This Template" ("Использовать этот шаблон").
 
-More details [here](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template).
-After creating your own repo from template, just clone it and use.
+Больше информации [здесь](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template).
+После создания шаблона, просто клонируйте его и используйте.
 
-#### Or clone it manually
+#### Или клонируйте проект вручную:
 
-1. clone repo:
+1. склонируйте репозиторий:
 
    ```bash
    git clone https://github.com/frontend05102019/GULP_TEMPLATE_PROJECT.git
    ```
 
-2. open cloned folder in terminal (you can rename folder as you like)
-3. replace remote repo in git config with your remote repo:
+2. откройте в теминале склонированный проект (можете переименовать папку как захотите)
+3. замените ссылку на удаленный репозиторий в git config ссылкой на ваш репозиторий:
 
    ```bash
    git remote set-url origin <YOUR LINK TO YOUR REMOTE REPO>
    ```
 
-4. replace user name and user email in git config with your name and email
+4. замените имя пользователя и email в git config на ваши.
 
-### How to start project:
+### Как запустить проект:
 
-1. open project folder in terminal
+1. откройте папку проекта в терминале.
 
-2. install project dependencies:
+2. установите зависимости:
 
    ```bash
    npm install
    ```
 
-3. run project:
+3. запустите проект:
 
-   ```bash
-   npm run serve
-   ```
+   - чтобы запустить проект с компилятором less:
+     ```bash
+     npm run serve-less
+     # или
+     npm run serve
+     ```
+   - чтобы запустить проект с компилятором sass:
+     ```bash
+     npm run serve-sass
+     ```
 
-##### Project will start on localhost:3000.
+##### Проект запустится на localhost:3000.
 
-##### Project will auto reload on every files save.
+##### Проект автоматически перезагружает браузер при каждом сохранении.
 
-##### TO EXIT, in terminal PRESS Ctrl+C.
+##### ЧТОБЫ ЗАКОНЧИТЬ РАБОТУ, в теминале нажмите Ctrl+C.
 
-### How to write code:
+#### КАК СМЕНИТЬ КОМПИЛЯТОР:
 
-1. You should work ONLY in /src folder
-2. All html code should be in /src/index.html
-3. All styles must be in /src/styles/main.less. If you want to add extra styles file, add it in src/styles folder and import it into main.less
-4. All fonts should be placed into /src/fonts and imported into main.less from this folder, e.g.:
+Чтобы перейти с использования less на sass и поменять компилятор, нужно:
+
+- остановить проект командой Ctrl+C, если проект запущен
+- создать в папке src/styles/ файл main.sass (ВАЖНО! Название обязательно должно быть main.sass)
+- добавить в main.sass стили
+- запустить проект соответствующей командой(см. "Как запустить проект" выше)
+
+Чтобы сменить компилятор обратно на less, нужно просто запустить соответствующую команду(см. "Как запустить проект" выше). Перед запуском убедитесь, что main.less существует.
+
+### Как писать код:
+
+1. Вы должны работать ТОЛЬКО в папке /src
+2. Весь html код должен быть в /src/index.html
+3. Все стили доджны быть в файле /src/styles/main.less. Если вы хотите добавить дополнительные файлы со стилями, добавляйте их в папке src/styles и используйте @import в main.less
+4. Все шрифты(если есть) должны быть помещены в папку /src/fonts и импортированы в main.less из этой папки, например:
 
 ```bash
+    # пример для less
     # in /src/styles/main.less
     @font-face {
         font-family: "christmas";
@@ -74,7 +92,7 @@ After creating your own repo from template, just clone it and use.
     }
 ```
 
-5. All images(png, img, svg) should be placed into /src/images and imported from this folder, e.g:
+5. Все картинки(png, img, svg) должны быть помещены в папку /src/images и импортированы из этой папки, например:
 
 ```bash
     # in src/index.html
