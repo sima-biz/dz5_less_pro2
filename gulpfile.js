@@ -1,8 +1,21 @@
+const fs = require("fs");
 const less = require("gulp-less");
-const path = require("path");
-const { src, dest, watch, series, parallel } = require("gulp");
+const sass = require("gulp-sass");
+sass.compiler = require("node-sass");
+const { src, dest, watch, series, task } = require("gulp");
 const browserSync = require("browser-sync").create();
 const liveReload = require("gulp-livereload");
+
+const CSS_COMPILERS = {
+  less: {
+    name: "less",
+    cb: () => less()
+  },
+  sass: {
+    name: "sass",
+    cb: () => sass().on("error", sass.logError)
+  }
+};
 
 function createSyncWithBrowser(cb) {
   browserSync.init({
@@ -12,11 +25,17 @@ function createSyncWithBrowser(cb) {
   });
 }
 
-function compileLess(cb) {
-  return src("src/styles/main.less")
-    .pipe(less())
-    .pipe(dest("./dist"))
-    .pipe(browserSync.stream());
+function compileCss(compilerName = CSS_COMPILERS.less.name) {
+  const targetFileName = `main.${compilerName}`;
+  const path = `src/styles/${targetFileName}`;
+  const fileExists = fs.existsSync(path);
+  return (
+    fileExists &&
+    src(path)
+      .pipe(CSS_COMPILERS[compilerName].cb())
+      .pipe(dest("./dist"))
+      .pipe(browserSync.stream())
+  );
 }
 
 function pipeHtml(cb) {
@@ -33,28 +52,43 @@ function pipeFonts(cb) {
   return src("src/fonts/**.*").pipe(dest("./dist/fonts"));
 }
 
-const startSeries = () => {
+const startSeries = cssCompilerName => {
   pipeImages();
   pipeHtml();
   pipeFonts();
   pipeImages();
-  compileLess();
+  compileCss(cssCompilerName);
 };
 
-function watchChanges(cb) {
+function watchChanges(cssCompilerName) {
   watch(
     "./src",
-    series(pipeImages, pipeHtml, pipeFonts, pipeImages, compileLess)
+    series(pipeImages, pipeHtml, pipeFonts, pipeImages, () =>
+      compileCss(cssCompilerName)
+    )
   );
 }
 
-function initCompile() {
-  startSeries();
+function initCompile(cssCompilerName) {
+  startSeries(cssCompilerName);
   createSyncWithBrowser();
   liveReload.listen();
 }
 
-initCompile();
+function startTasks(cssCompilerName) {
+  watchChanges(cssCompilerName);
+  initCompile(cssCompilerName);
+}
 
-exports.watch = watchChanges;
-exports.default = watchChanges;
+// tasks
+task("less", () => {
+  const { name } = CSS_COMPILERS.less;
+  startTasks(name);
+});
+
+task("sass", () => {
+  const { name } = CSS_COMPILERS.sass;
+  startTasks(name);
+});
+
+exports.default = () => {};
