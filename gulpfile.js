@@ -33,7 +33,7 @@ function compileCss(compilerName = CSS_COMPILERS.less.name) {
     fileExists &&
     src(path)
       .pipe(CSS_COMPILERS[compilerName].cb())
-      .pipe(dest("./dist"))
+      .pipe(dest("./dist/styles"))
       .pipe(browserSync.stream())
   );
 }
