@@ -146,6 +146,13 @@ body {
             cursor: pointer; 
           }   
         }
+        // #plusaaa:checked ~ #plusnav {
+        //   display: none;
+        //   display: block;  
+        // } 
+        //   #plusaaa:checked ~ li {
+        //   display: block;  
+        // }
         #plusnav:hover .imgplus {
           display: none;
           display: block;  
@@ -464,7 +471,7 @@ body {
     }    
   } 
 }
-@media screen and (min-width: 0px) and (max-width: 768px) {
+@media screen and (min-width: 469px) and (max-width: 768px) {
   header .aaa #nav {
     position: absolute;
     margin-top: -30px;
@@ -472,10 +479,65 @@ body {
   }
   #plus .plusaaa #plusnav {
     opacity: 0.8;
+  }
+  body .ggg .block1 {
+    background-size: 100% 100%;
+    min-height: 300px;  
+  }
+  body .ggg #plus .plusaaa #plusnav {
+    margin-top: -300px;
+  }
+  #plus .plusaaa #plusnav {
+    opacity: 0.8;
+  } 
+  body .ggg .block1 .textblock1_1 {
+    font-size: 29px;
+    padding-top: 50px;
+  }
+  body .ggg .block1 .textblock1_2 {
+    font-size: 24px; 
+    padding-top: 7px;
+    padding-bottom: 20px; 
+  }
+  body .ggg .block1 .seeportfolio {
+    margin-top: 0px;
+    padding: 10px 25px;
+  }
+}
+@media screen and (min-width: 0px) and (max-width: 468px) {
+  body .ggg .block1 .textblock1_2 {
+    position: absolute;
+    opacity: 0;  
+  }
+  body .ggg .block1 .textblock1_1 {
+    padding-bottom: 25px;
+    padding: 27px 0;
+    font-size: 30px;
+
+  }
+  body .ggg .block1 {
+    background-size: 100% 100%;
+    min-height: 300px;  
+  }
+  body .ggg #plus .plusaaa #plusnav {
+    margin-top: -300px;
+  }
+  header .aaa #nav {
+    position: absolute;
+    margin-top: -30px;
+    opacity: 0;
+  }
+  #plus .plusaaa #plusnav {
+    opacity: 0.8;
+  }
+  body .ggg .block1 .seeportfolio {
+    margin-top: 0px;
+    padding: 10px 25px;
   } 
 }
 @media screen and (min-width: 768px) {
-  #plus .plusaaa #plusnav {
+  #plusnav {
+    
     opacity: 0;
   }
 }
